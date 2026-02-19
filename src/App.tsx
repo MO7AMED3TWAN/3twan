@@ -58,7 +58,7 @@ function Navigation() {
             <div className="w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center group-hover:scale-110 transition-transform">
               <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">Mohamed<span className="text-[#654aff]">.</span></span>
+            <span className="text-xl font-bold text-white">3twan<span className="text-[#654aff]">.</span>com</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -209,8 +209,8 @@ function HeroSection() {
         <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
           {[
             { value: '2+', label: 'Years Experience' },
-            { value: '50+', label: 'Projects Completed' },
-            { value: '10+', label: 'Awards Won' },
+            { value: '5+', label: 'Projects Completed' },
+            { value: '2+', label: 'Awards Won' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-gradient mb-1">{stat.value}</div>
