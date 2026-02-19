@@ -1068,24 +1068,102 @@ function ContactSection() {
     date: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+
+    if (!formData.projectType) {
+      newErrors.projectType = 'Please select a service';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Project details are required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Please provide at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Create mailto link with project details
-    const subject = encodeURIComponent('Freelancing Work - Project Inquiry');
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Project Type: ${formData.projectType}\n` +
-      `Preferred Date: ${formData.date}\n\n` +
-      `Project Details:\n${formData.message}`
-    );
-    
-    window.location.href = `mailto:Mo7amed3twan@gmail.com?subject=${subject}&body=${body}`;
-    
-    toast.success('Opening email client...', {
-      description: 'Your project details are ready to send!',
-    });
+
+    if (!validateForm()) {
+      toast.error('Please fix the errors above', {
+        description: 'Check all required fields',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Simulate a small delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Create mailto link with project details
+      const subject = encodeURIComponent('Freelancing Work - Project Inquiry');
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Project Type: ${formData.projectType}\n` +
+        `Preferred Date: ${formData.date || 'Not specified'}\n\n` +
+        `Project Details:\n${formData.message}`
+      );
+
+      window.location.href = `mailto:Mo7amed3twan@gmail.com?subject=${subject}&body=${body}`;
+
+      toast.success('Opening email client...', {
+        description: 'Your project details are ready to send!',
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        projectType: '',
+        message: '',
+        date: '',
+      });
+      setErrors({});
+    } catch (error) {
+      toast.error('Something went wrong', {
+        description: 'Please try again',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: '',
+      }));
+    }
   };
 
   return (
@@ -1118,35 +1196,59 @@ function ContactSection() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-white/70 text-sm mb-2">Your Name</label>
+                  <label className="block text-white/70 text-sm mb-2">
+                    Your Name
+                    {errors.name && <span className="text-red-400 ml-1">*</span>}
+                  </label>
                   <Input
                     type="text"
+                    name="name"
                     placeholder="John Doe"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff]"
+                    onChange={handleChange}
+                    className={`bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] transition-colors ${
+                      errors.name ? 'border-red-500/50 focus:border-red-500' : ''
+                    }`}
                     required
                   />
+                  {errors.name && (
+                    <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-white/70 text-sm mb-2">Email Address</label>
+                  <label className="block text-white/70 text-sm mb-2">
+                    Email Address
+                    {errors.email && <span className="text-red-400 ml-1">*</span>}
+                  </label>
                   <Input
                     type="email"
+                    name="email"
                     placeholder="john@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff]"
+                    onChange={handleChange}
+                    className={`bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] transition-colors ${
+                      errors.email ? 'border-red-500/50 focus:border-red-500' : ''
+                    }`}
                     required
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-white/70 text-sm mb-2">Project Type</label>
+                <label className="block text-white/70 text-sm mb-2">
+                  Project Type
+                  {errors.projectType && <span className="text-red-400 ml-1">*</span>}
+                </label>
                 <select
+                  name="projectType"
                   value={formData.projectType}
-                  onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                  className="w-full px-4 py-2 rounded-md bg-white/5 border border-white/10 text-white focus:border-[#654aff] focus:outline-none"
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 rounded-md bg-white/5 border border-white/10 text-white focus:border-[#654aff] focus:outline-none transition-colors ${
+                    errors.projectType ? 'border-red-500/50 focus:border-red-500' : ''
+                  }`}
                   required
                 >
                   <option value="" className="bg-black">Select a service</option>
@@ -1155,35 +1257,63 @@ function ContactSection() {
                   <option value="AI Automation" className="bg-black">AI Automation</option>
                   <option value="Other" className="bg-black">Other</option>
                 </select>
+                {errors.projectType && (
+                  <p className="text-red-400 text-xs mt-1">{errors.projectType}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-white/70 text-sm mb-2">Preferred Meeting Date</label>
+                <label className="block text-white/70 text-sm mb-2">Preferred Meeting Date (Optional)</label>
                 <Input
                   type="date"
+                  name="date"
                   value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  onChange={handleChange}
                   className="bg-white/5 border-white/10 text-white focus:border-[#654aff]"
                 />
               </div>
 
               <div>
-                <label className="block text-white/70 text-sm mb-2">Project Details</label>
+                <label className="block text-white/70 text-sm mb-2">
+                  Project Details
+                  {errors.message && <span className="text-red-400 ml-1">*</span>}
+                </label>
                 <Textarea
+                  name="message"
                   placeholder="Tell me about your project, goals, and timeline..."
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] min-h-[120px]"
+                  onChange={handleChange}
+                  className={`bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] min-h-[120px] transition-colors ${
+                    errors.message ? 'border-red-500/50 focus:border-red-500' : ''
+                  }`}
                   required
                 />
+                <div className="flex justify-between items-center mt-1">
+                  {errors.message && (
+                    <p className="text-red-400 text-xs">{errors.message}</p>
+                  )}
+                  <p className="text-white/40 text-xs ml-auto">
+                    {formData.message.length}/500 characters
+                  </p>
+                </div>
               </div>
 
               <Button 
-                type="submit" 
-                className="w-full bg-[#654aff] hover:bg-[#7c5cff] text-white rounded-full py-6 text-lg group"
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-[#654aff] hover:bg-[#7c5cff] disabled:bg-[#654aff]/50 disabled:cursor-not-allowed text-white rounded-full py-6 text-lg group transition-all"
               >
-                Schedule Consultation
-                <Calendar className="w-5 h-5 ml-2" />
+                {isSubmitting ? (
+                  <>
+                    <span className="opacity-0">Schedule</span>
+                    <span className="absolute">Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    Schedule Consultation
+                    <Calendar className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
