@@ -1115,7 +1115,7 @@ function ContactSection() {
       const formDataToSend = new FormData();
       
       // Add Web3Forms access key (get from https://web3forms.com)
-      formDataToSend.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY_HERE');
+      formDataToSend.append('access_key', '7c47f178-d784-417d-8b9e-c6418ac5096d');
       
       // Add form fields
       formDataToSend.append('name', formData.name);
