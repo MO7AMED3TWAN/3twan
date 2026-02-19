@@ -1111,37 +1111,53 @@ function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      // Simulate a small delay for better UX
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Prepare form data for Web3Forms
+      const formDataToSend = new FormData();
+      
+      // Add Web3Forms access key (get from https://web3forms.com)
+      formDataToSend.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY_HERE');
+      
+      // Add form fields
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('project_type', formData.projectType);
+      formDataToSend.append('preferred_date', formData.date || 'Not specified');
+      formDataToSend.append('message', formData.message);
+      
+      // Optional: Add subject and redirect URL
+      formDataToSend.append('subject', 'New Consultation Request from 3twan');
+      formDataToSend.append('from_name', formData.name);
 
-      // Create mailto link with project details
-      const subject = encodeURIComponent('Freelancing Work - Project Inquiry');
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Project Type: ${formData.projectType}\n` +
-        `Preferred Date: ${formData.date || 'Not specified'}\n\n` +
-        `Project Details:\n${formData.message}`
-      );
-
-      window.location.href = `mailto:Mo7amed3twan@gmail.com?subject=${subject}&body=${body}`;
-
-      toast.success('Opening email client...', {
-        description: 'Your project details are ready to send!',
+      // Send to Web3Forms API
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend,
       });
 
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        projectType: '',
-        message: '',
-        date: '',
-      });
-      setErrors({});
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Consultation request sent!', {
+          description: 'I\'ll get back to you as soon as possible.',
+        });
+
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          projectType: '',
+          message: '',
+          date: '',
+        });
+        setErrors({});
+      } else {
+        toast.error('Failed to send request', {
+          description: data.message || 'Please try again',
+        });
+      }
     } catch (error) {
       toast.error('Something went wrong', {
-        description: 'Please try again',
+        description: 'Please check your internet connection and try again',
       });
     } finally {
       setIsSubmitting(false);
