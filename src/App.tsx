@@ -14,13 +14,13 @@ import { toast } from 'sonner';
 import './App.css';
 
 // Import images
-import hero1 from '@/assets/images/hero-1.svg';
-import hero2 from '@/assets/images/hero-2.svg';
-import hero3 from '@/assets/images/hero-3.svg';
-import aboutImg from '@/assets/images/about.svg';
-import project1Img from '@/assets/images/project-1.svg';
-import project2Img from '@/assets/images/project-2.svg';
-import project3Img from '@/assets/images/project-3.svg';
+import hero1 from '@/assets/images/hero-1.jpg';
+import hero2 from '@/assets/images/hero-2.jpg';
+import hero3 from '@/assets/images/hero-3.jpg';
+import aboutImg from '@/assets/images/about.jpg';
+import project1Img from '@/assets/images/project-1.jpg';
+import project2Img from '@/assets/images/project-2.jpg';
+import project3Img from '@/assets/images/project-3.jpg';
 import blog1Img from '@/assets/images/blog-1.svg';
 import blog2Img from '@/assets/images/blog-2.svg';
 import blog3Img from '@/assets/images/blog-3.svg';
