@@ -13,6 +13,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import './App.css';
 
+// Import images
+import hero1 from '@/assets/images/hero-1.svg';
+import hero2 from '@/assets/images/hero-2.svg';
+import hero3 from '@/assets/images/hero-3.svg';
+import aboutImg from '@/assets/images/about.svg';
+import project1Img from '@/assets/images/project-1.svg';
+import project2Img from '@/assets/images/project-2.svg';
+import project3Img from '@/assets/images/project-3.svg';
+import blog1Img from '@/assets/images/blog-1.svg';
+import blog2Img from '@/assets/images/blog-2.svg';
+import blog3Img from '@/assets/images/blog-3.svg';
+
 // Navigation Component
 function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -112,9 +124,9 @@ function Navigation() {
 function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroImages = [
-    'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop',
-    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1920&h=1080&fit=crop',
-    'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1920&h=1080&fit=crop',
+    hero1,
+    hero2,
+    hero3,
   ];
 
   useEffect(() => {
@@ -122,7 +134,7 @@ function HeroSection() {
       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages.length]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -235,7 +247,7 @@ function AboutSection() {
             <div className="absolute -inset-4 bg-gradient-to-r from-[#654aff] to-purple-600 rounded-3xl opacity-30 blur-2xl group-hover:opacity-50 transition-opacity" />
             <div className="relative rounded-3xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop"
+                src={aboutImg}
                 alt="Mohamed Atwan"
                 className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
@@ -547,7 +559,7 @@ function ProjectsSection() {
       title: 'Hadith Chatbot System',
       category: 'NLP & LLMs',
       description: 'An advanced chatbot system that delivers authenticated hadiths, explanations, and actionable lessons. Built with RAG architecture using LangChain and Qdrant vector database.',
-      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=800&fit=crop',
+      image: project1Img,
       technologies: ['Python', 'LangChain', 'Qdrant', 'QWEN 2.5', 'Hugging Face', 'PEFT'],
       features: [
         'Retrieval-Augmented Generation (RAG) for accurate responses',
@@ -562,7 +574,7 @@ function ProjectsSection() {
       title: 'Arabic Speech Recognition',
       category: 'Deep Learning',
       description: 'Deep Learning-based Speech-to-Text system for Modern Standard Arabic & Egyptian dialects in real-world noisy environments. Ranked 5th in MTC-AIC2 competition.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop',
+      image: project2Img,
       technologies: ['DeepSpeech 2', 'PyTorch', 'CNN', 'LSTM', 'GRU', 'MFCC'],
       features: [
         'DeepSpeech 2 architecture with CNNs & RNNs',
@@ -577,7 +589,7 @@ function ProjectsSection() {
       title: 'Supply Chain AI Solution',
       category: 'AI Automation',
       description: 'AI-powered supply chain optimization solution that won Top 8 in Huawei Spark Infinity North Africa 2024. Features demand forecasting and inventory optimization.',
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=800&fit=crop',
+      image: project3Img,
       technologies: ['Python', 'TensorFlow', 'Time Series', 'Forecasting', 'Optimization'],
       features: [
         'Demand forecasting with ML models',
@@ -852,7 +864,7 @@ function BlogSection() {
           <li>Starting with narrow, well-defined tasks</li>
         </ul>
       `,
-      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=800&fit=crop',
+      image: blog1Img,
       date: 'Jan 15, 2025',
       readTime: '8 min read',
     },
@@ -890,7 +902,7 @@ function BlogSection() {
           <li>Plan for continuous retraining pipelines</li>
         </ul>
       `,
-      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1200&h=800&fit=crop',
+      image: blog2Img,
       date: 'Jan 10, 2025',
       readTime: '12 min read',
     },
@@ -938,7 +950,7 @@ function BlogSection() {
           <li>Insufficient testing</li>
         </ul>
       `,
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=800&fit=crop',
+      image: blog3Img,
       date: 'Jan 5, 2025',
       readTime: '10 min read',
     },
