@@ -1129,7 +1129,7 @@ function ContactSection() {
       formDataToSend.append('message', formData.message);
       
       // Optional: Add subject and redirect URL
-      formDataToSend.append('subject', 'New Consultation Request from 3twan');
+      formDataToSend.append('subject', 'New Consultation Request from 3twan.com');
       formDataToSend.append('from_name', formData.name);
 
       // Send to Web3Forms API
