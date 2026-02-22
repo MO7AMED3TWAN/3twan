@@ -324,24 +324,29 @@ function AboutSection() {
 function SkillsSection() {
   const skillCategories = [
     {
-      title: 'AI & Machine Learning',
+      title: 'AI Technologies',
       icon: Brain,
-      skills: ['Machine Learning', 'Deep Learning', 'NLP', 'Computer Vision', 'LLMs', 'Transformers'],
+      skills: ['Machine Learning', 'Deep Learning', 'NLP', 'TTS', 'STT', 'LLMs'],
+    },
+    {
+      title: 'Programming Languages',
+      icon: Code2,
+      skills: ['Python'],
     },
     {
       title: 'Frameworks & Tools',
       icon: Code2,
-      skills: ['PyTorch', 'TensorFlow', 'Hugging Face', 'LangChain', 'Scikit-learn', 'OpenAI'],
+      skills: ['PyTorch', 'TensorFlow', 'Mindspore', 'Hugging Face', 'LangChain', 'Transformers', 'OpenAI', 'FastAPI', 'django', 'Qdrant', 'Milvus', 'Faiss', 'pinecone'],
     },
     {
       title: 'Cloud & MLOps',
       icon: Cloud,
-      skills: ['Huawei Cloud', 'Azure', 'Docker', 'Kubernetes', 'MLflow', 'Git'],
+      skills: ['Huawei Cloud', 'Azure', 'Docker', 'Kubernetes', 'MLflow', 'Git/GitHub', 'Linux', 'Bash'],
     },
     {
       title: 'Data & Databases',
       icon: Database,
-      skills: ['Python', 'SQL', 'Pandas', 'NumPy', 'Vector DBs', 'ETL Pipelines'],
+      skills: ['SQL', 'Pandas', 'NumPy', 'Vector DBs', 'ETL Pipelines'],
     },
   ];
 
