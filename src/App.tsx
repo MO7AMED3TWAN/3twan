@@ -378,7 +378,7 @@ function AboutSection({ theme }: { theme: string }) {
 }
 
 // Skills Section
-function SkillsSection({ theme }: { theme: string }) {
+function SkillsSection() {
   const skillCategories = [
     {
       title: 'AI Technologies',
@@ -501,7 +501,7 @@ function SkillsSection({ theme }: { theme: string }) {
 }
 
 // Services Section
-function ServicesSection({ theme }: { theme: string }) {
+function ServicesSection() {
   const [activeService, setActiveService] = useState(0);
 
   const services = [
@@ -602,7 +602,7 @@ function ServicesSection({ theme }: { theme: string }) {
 }
 
 // Projects Section
-function ProjectsSection({ theme }: { theme: string }) {
+function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   const projects = [
@@ -805,7 +805,7 @@ function ProjectsSection({ theme }: { theme: string }) {
 }
 
 // Testimonials Section
-function TestimonialsSection({ theme }: { theme: string }) {
+function TestimonialsSection() {
   const testimonials = [
     {
       name: 'Ahmed Hassan',
@@ -877,7 +877,7 @@ function TestimonialsSection({ theme }: { theme: string }) {
 }
 
 // Blog Section
-function BlogSection({ theme }: { theme: string }) {
+function BlogSection() {
   const [selectedArticle, setSelectedArticle] = useState<typeof articles[0] | null>(null);
 
   const articles = [
@@ -1508,7 +1508,7 @@ function Footer({ theme }: { theme: string }) {
 }
 
 // Scroll to Top Button Component
-function ScrollToTopButton({ theme }: { theme: string }) {
+function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -1557,15 +1557,15 @@ function App() {
       <main>
         <HeroSection theme={theme} />
         <AboutSection theme={theme} />
-        <SkillsSection theme={theme} />
-        <ServicesSection theme={theme} />
-        <ProjectsSection theme={theme} />
-        <TestimonialsSection theme={theme} />
-        <BlogSection theme={theme} />
+        <SkillsSection />
+        <ServicesSection />
+        <ProjectsSection />
+        <TestimonialsSection />
+        <BlogSection />
         <ContactSection theme={theme} />
       </main>
       <Footer theme={theme} />
-      <ScrollToTopButton theme={theme} />
+      <ScrollToTopButton />
     </div>
   );
 }
