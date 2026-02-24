@@ -26,7 +26,7 @@ import blog2Img from '@/assets/images/blog-2.svg';
 import blog3Img from '@/assets/images/blog-3.svg';
 
 // Navigation Component
-function Navigation({ theme, setTheme }) {
+function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: string) => void }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -166,7 +166,7 @@ function Navigation({ theme, setTheme }) {
 }
 
 // Hero Section
-function HeroSection({ theme }) {
+function HeroSection({ theme }: { theme: string }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroImages = [
     hero1,
@@ -294,7 +294,7 @@ function HeroSection({ theme }) {
 }
 
 // About Section
-function AboutSection({ theme }) {
+function AboutSection({ theme }: { theme: string }) {
   return (
     <section id="about" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-gray-50' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -378,7 +378,7 @@ function AboutSection({ theme }) {
 }
 
 // Skills Section
-function SkillsSection({ theme }) {
+function SkillsSection({ theme }: { theme: string }) {
   const skillCategories = [
     {
       title: 'AI Technologies',
@@ -501,7 +501,7 @@ function SkillsSection({ theme }) {
 }
 
 // Services Section
-function ServicesSection({ theme }) {
+function ServicesSection({ theme }: { theme: string }) {
   const [activeService, setActiveService] = useState(0);
 
   const services = [
@@ -602,7 +602,7 @@ function ServicesSection({ theme }) {
 }
 
 // Projects Section
-function ProjectsSection({ theme }) {
+function ProjectsSection({ theme }: { theme: string }) {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   const projects = [
@@ -805,7 +805,7 @@ function ProjectsSection({ theme }) {
 }
 
 // Testimonials Section
-function TestimonialsSection({ theme }) {
+function TestimonialsSection({ theme }: { theme: string }) {
   const testimonials = [
     {
       name: 'Ahmed Hassan',
@@ -877,7 +877,7 @@ function TestimonialsSection({ theme }) {
 }
 
 // Blog Section
-function BlogSection({ theme }) {
+function BlogSection({ theme }: { theme: string }) {
   const [selectedArticle, setSelectedArticle] = useState<typeof articles[0] | null>(null);
 
   const articles = [
@@ -1110,7 +1110,7 @@ function BlogSection({ theme }) {
 }
 
 // Contact Section
-function ContactSection({ theme }) {
+function ContactSection({ theme }: { theme: string }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -1456,7 +1456,7 @@ function ContactSection({ theme }) {
 }
 
 // Footer
-function Footer({ theme }) {
+function Footer({ theme }: { theme: string }) {
   return (
     <footer className={`py-12 border-t ${theme === 'dark' ? 'border-white/10 bg-black' : 'border-black/10 bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1508,7 +1508,7 @@ function Footer({ theme }) {
 }
 
 // Scroll to Top Button Component
-function ScrollToTopButton({ theme }) {
+function ScrollToTopButton({ theme }: { theme: string }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
