@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { 
-  Menu, X, Github, Linkedin, Mail, Phone, ArrowRight, 
+  Menu, X, Github, Linkedin, Mail, Phone, ArrowRight, ArrowUp,
   Brain, MessageSquare, Bot, Workflow, Cpu, 
   Cloud, Code2, Sparkles, ChevronRight, ExternalLink, 
   Calendar, Send, Quote, Star, BookOpen,
@@ -1395,7 +1395,7 @@ function Footer() {
             <div className="w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center">
               <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">Mohamed<span className="text-[#654aff]">.</span></span>
+            <span className="text-xl font-bold text-white">Mohamed<span className="text-[#654aff]">.</span>ATWAN</span>
           </div>
 
           {/* Quick Links */}
@@ -1436,6 +1436,39 @@ function Footer() {
   );
 }
 
+// Scroll to Top Button Component
+function ScrollToTopButton() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full bg-[#654aff] hover:bg-[#7c5cff] text-white shadow-lg transition-all duration-300 flex items-center justify-center group ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+      }`}
+      aria-label="Scroll to top"
+      title="Back to top"
+    >
+      <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+    </button>
+  );
+}
+
 // Main App Component
 function App() {
   return (
@@ -1452,6 +1485,7 @@ function App() {
         <ContactSection />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 }
