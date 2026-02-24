@@ -378,7 +378,7 @@ function AboutSection({ theme }: { theme: string }) {
 }
 
 // Skills Section
-function SkillsSection() {
+function SkillsSection({ theme }: { theme: string }) {
   const skillCategories = [
     {
       title: 'AI Technologies',
@@ -412,14 +412,16 @@ function SkillsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${
+            theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          }`}>
             <Zap className="w-4 h-4 text-[#654aff]" />
-            <span className="text-sm text-white/80">My Expertise</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>My Expertise</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Skills & <span className="text-gradient">Technologies</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
             A comprehensive toolkit built over years of working on cutting-edge AI projects
           </p>
         </div>
@@ -429,20 +431,30 @@ function SkillsSection() {
           {skillCategories.map((category) => (
             <div
               key={category.title}
-              className="group glass rounded-2xl p-6 hover:border-[#654aff]/50 transition-all duration-300"
+              className={`group glass rounded-2xl p-6 hover:border-[#654aff]/50 transition-all duration-300 ${
+                theme === 'dark' 
+                  ? 'bg-white/10 border-white/20' 
+                  : 'bg-black/5 border-black/10'
+              }`}
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#654aff]/20 flex items-center justify-center group-hover:bg-[#654aff] transition-colors">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center group-hover:bg-[#654aff] transition-colors ${
+                  theme === 'dark' ? 'bg-[#654aff]/20' : 'bg-[#654aff]/10'
+                }`}>
                   <category.icon className="w-6 h-6 text-[#654aff] group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-semibold text-white">{category.title}</h3>
+                <h3 className={`text-xl font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{category.title}</h3>
               </div>
               
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 rounded-full bg-white/5 text-white/70 text-sm border border-white/10 hover:border-[#654aff]/50 hover:text-white transition-colors"
+                    className={`px-3 py-1.5 rounded-full text-sm border hover:border-[#654aff]/50 hover:text-[#654aff] transition-colors ${
+                      theme === 'dark'
+                        ? 'bg-white/5 text-white/70 border-white/10'
+                        : 'bg-black/5 text-black/70 border-black/10'
+                    }`}
                   >
                     {skill}
                   </span>
@@ -454,7 +466,7 @@ function SkillsSection() {
 
         {/* Experience Timeline */}
         <div className="mt-20">
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">Experience Timeline</h3>
+          <h3 className={`text-2xl font-bold mb-8 text-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Experience Timeline</h3>
           <div className="space-y-6">
             {[
               {
@@ -479,16 +491,20 @@ function SkillsSection() {
               <div key={index} className="flex gap-4 md:gap-8">
                 <div className="flex flex-col items-center">
                   <div className="w-4 h-4 rounded-full bg-[#654aff]" />
-                  {index < 3 && <div className="w-0.5 flex-1 bg-white/10 mt-2" />}
+                  {index < 3 && <div className={`w-0.5 flex-1 ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'} mt-2`} />}
                 </div>
                 <div className="pb-8 flex-1">
-                  <div className="glass rounded-xl p-5 hover:border-[#654aff]/30 transition-colors">
+                  <div className={`glass rounded-xl p-5 hover:border-[#654aff]/30 transition-colors ${
+                    theme === 'dark'
+                      ? 'bg-white/10 border-white/20'
+                      : 'bg-black/5 border-black/10'
+                  }`}>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                      <h4 className="text-lg font-semibold text-white">{exp.role}</h4>
+                      <h4 className={`text-lg font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{exp.role}</h4>
                       <span className="text-sm text-[#654aff]">{exp.period}</span>
                     </div>
-                    <div className="text-white/60 mb-2">{exp.company}</div>
-                    <p className="text-white/50 text-sm">{exp.description}</p>
+                    <div className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>{exp.company}</div>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>{exp.description}</p>
                   </div>
                 </div>
               </div>
@@ -501,7 +517,7 @@ function SkillsSection() {
 }
 
 // Services Section
-function ServicesSection() {
+function ServicesSection({ theme }: { theme: string }) {
   const [activeService, setActiveService] = useState(0);
 
   const services = [
@@ -526,18 +542,20 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="services" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-white' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${
+            theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          }`}>
             <Layers className="w-4 h-4 text-[#654aff]" />
-            <span className="text-sm text-white/80">What I Offer</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>What I Offer</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             My <span className="text-gradient">Services</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
             Specialized AI solutions tailored to transform your business operations
           </p>
         </div>
@@ -549,33 +567,39 @@ function ServicesSection() {
               key={service.title}
               className={`relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 ${
                 activeService === index 
-                  ? 'lg:flex-[3] bg-gradient-to-br from-[#654aff]/20 to-purple-900/20 border border-[#654aff]/50' 
-                  : 'lg:flex-1 glass hover:border-white/20'
+                  ? theme === 'dark'
+                    ? 'lg:flex-[3] bg-gradient-to-br from-[#654aff]/20 to-purple-900/20 border border-[#654aff]/50'
+                    : 'lg:flex-[3] bg-gradient-to-br from-[#654aff]/10 to-purple-600/10 border border-[#654aff]/30'
+                  : theme === 'dark'
+                    ? 'lg:flex-1 glass bg-white/10 border-white/20 hover:border-white/30'
+                    : 'lg:flex-1 glass bg-black/5 border-black/10 hover:border-black/20'
               }`}
               onClick={() => setActiveService(index)}
             >
               <div className="p-6 md:p-8 h-full flex flex-col">
                 {/* Icon */}
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-colors ${
-                  activeService === index ? 'bg-[#654aff]' : 'bg-white/10'
+                  activeService === index 
+                    ? 'bg-[#654aff]' 
+                    : theme === 'dark' ? 'bg-white/10' : 'bg-black/10'
                 }`}>
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-4">{service.title}</h3>
+                <h3 className={`text-xl md:text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{service.title}</h3>
 
                 {/* Content - Only visible when active */}
                 <div className={`overflow-hidden transition-all duration-500 ${
                   activeService === index ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 lg:max-h-0'
                 }`}>
-                  <p className="text-white/70 mb-6 leading-relaxed">{service.description}</p>
+                  <p className={`mb-6 leading-relaxed ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>{service.description}</p>
                   
                   <div className="space-y-3">
                     {service.features.map((feature) => (
                       <div key={feature} className="flex items-center gap-3">
                         <CheckCircle2 className="w-5 h-5 text-[#654aff] flex-shrink-0" />
-                        <span className="text-white/80">{feature}</span>
+                        <span className={theme === 'dark' ? 'text-white/80' : 'text-black/80'}>{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -590,7 +614,7 @@ function ServicesSection() {
 
                 {/* Mobile: Always show description */}
                 <div className="lg:hidden mt-4">
-                  <p className="text-white/60 text-sm">{service.description}</p>
+                  <p className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{service.description}</p>
                 </div>
               </div>
             </div>
@@ -602,7 +626,7 @@ function ServicesSection() {
 }
 
 // Projects Section
-function ProjectsSection() {
+function ProjectsSection({ theme }: { theme: string }) {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   const projects = [
@@ -654,23 +678,27 @@ function ProjectsSection() {
   ];
 
   return (
-    <section id="projects" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="projects" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-gray-50' : ''}`}>
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#654aff]/10 rounded-full blur-[200px]" />
+        <div className={`absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-[200px] ${
+          theme === 'dark' ? 'bg-[#654aff]/10' : 'bg-[#654aff]/5'
+        }`} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${
+            theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          }`}>
             <Cpu className="w-4 h-4 text-[#654aff]" />
-            <span className="text-sm text-white/80">Featured Work</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>Featured Work</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             My <span className="text-gradient">Projects</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
             A selection of my most impactful AI and machine learning projects
           </p>
         </div>
@@ -805,7 +833,7 @@ function ProjectsSection() {
 }
 
 // Testimonials Section
-function TestimonialsSection() {
+function TestimonialsSection({ theme }: { theme: string }) {
   const testimonials = [
     {
       name: 'Ahmed Hassan',
@@ -828,15 +856,17 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
+    <section className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-white' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${
+            theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          }`}>
             <Quote className="w-4 h-4 text-[#654aff]" />
-            <span className="text-sm text-white/80">Client Testimonials</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>Client Testimonials</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             What Clients <span className="text-gradient">Say</span>
           </h2>
         </div>
@@ -846,7 +876,11 @@ function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.name}
-              className="glass rounded-2xl p-6 hover:border-[#654aff]/30 transition-all duration-300"
+              className={`glass rounded-2xl p-6 hover:border-[#654aff]/30 transition-all duration-300 ${
+                theme === 'dark'
+                  ? 'bg-white/10 border-white/20'
+                  : 'bg-black/5 border-black/10'
+              }`}
             >
               {/* Rating */}
               <div className="flex gap-1 mb-4">
@@ -856,7 +890,7 @@ function TestimonialsSection() {
               </div>
 
               {/* Content */}
-              <p className="text-white/70 leading-relaxed mb-6">{testimonial.content}</p>
+              <p className={`leading-relaxed mb-6 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>{testimonial.content}</p>
 
               {/* Author */}
               <div className="flex items-center gap-3">
@@ -864,8 +898,8 @@ function TestimonialsSection() {
                   {testimonial.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
-                  <div className="text-white font-semibold">{testimonial.name}</div>
-                  <div className="text-white/50 text-sm">{testimonial.role}</div>
+                  <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{testimonial.name}</div>
+                  <div className={`text-sm ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>{testimonial.role}</div>
                 </div>
               </div>
             </div>
@@ -877,7 +911,7 @@ function TestimonialsSection() {
 }
 
 // Blog Section
-function BlogSection() {
+function BlogSection({ theme }: { theme: string }) {
   const [selectedArticle, setSelectedArticle] = useState<typeof articles[0] | null>(null);
 
   const articles = [
@@ -1008,18 +1042,20 @@ function BlogSection() {
   ];
 
   return (
-    <section id="blog" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="blog" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-gray-50' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${
+            theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          }`}>
             <BookOpen className="w-4 h-4 text-[#654aff]" />
-            <span className="text-sm text-white/80">Latest Articles</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>Latest Articles</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             My <span className="text-gradient">Blog</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
             Insights and tutorials on AI, NLP, and automation
           </p>
         </div>
@@ -1029,7 +1065,11 @@ function BlogSection() {
           {articles.map((article) => (
             <article
               key={article.title}
-              className="group glass rounded-2xl overflow-hidden hover:border-[#654aff]/50 transition-all duration-300 cursor-pointer"
+              className={`group glass rounded-2xl overflow-hidden hover:border-[#654aff]/50 transition-all duration-300 cursor-pointer ${
+                theme === 'dark'
+                  ? 'bg-white/10 border-white/20'
+                  : 'bg-black/5 border-black/10'
+              }`}
               onClick={() => setSelectedArticle(article)}
             >
               {/* Image */}
@@ -1039,7 +1079,9 @@ function BlogSection() {
                   alt={article.title}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                <div className={`absolute inset-0 bg-gradient-to-t ${
+                  theme === 'dark' ? 'from-black via-black/50 to-transparent' : 'from-black/60 via-black/30 to-transparent'
+                }`} />
                 
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4">
@@ -1051,16 +1093,18 @@ function BlogSection() {
 
               {/* Content */}
               <div className="p-6">
-                <div className="flex items-center gap-4 text-white/50 text-sm mb-3">
+                <div className={`flex items-center gap-4 text-sm mb-3 ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>
                   <span>{article.date}</span>
                   <span>•</span>
                   <span>{article.readTime}</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#654aff] transition-colors line-clamp-2">
+                <h3 className={`text-xl font-bold mb-3 group-hover:text-[#654aff] transition-colors line-clamp-2 ${
+                  theme === 'dark' ? 'text-white' : 'text-black'
+                }`}>
                   {article.title}
                 </h3>
-                <p className="text-white/60 text-sm line-clamp-3">{article.excerpt}</p>
+                <p className={`text-sm line-clamp-3 ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{article.excerpt}</p>
                 
                 <div className="flex items-center gap-2 mt-4 text-[#654aff] text-sm font-medium">
                   Read More
@@ -1557,11 +1601,11 @@ function App() {
       <main>
         <HeroSection theme={theme} />
         <AboutSection theme={theme} />
-        <SkillsSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <TestimonialsSection />
-        <BlogSection />
+        <SkillsSection theme={theme} />
+        <ServicesSection theme={theme} />
+        <ProjectsSection theme={theme} />
+        <TestimonialsSection theme={theme} />
+        <BlogSection theme={theme} />
         <ContactSection theme={theme} />
       </main>
       <Footer theme={theme} />
