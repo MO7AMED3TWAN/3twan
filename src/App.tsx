@@ -407,23 +407,17 @@ function SkillsSection() {
                 description: 'Full-time AI development, NLP systems, LLM integration, and cloud-native solutions.',
               },
               {
-                role: 'AI Instructor',
-                company: 'Shabab Mobtakeron',
-                period: 'Oct 2024 - Apr 2025',
-                description: 'Part-time teaching AI and deep learning concepts, supervising graduation projects.',
+                role: 'Freelance NLP Consultant',
+                company: 'upwork , Mostaql & khamsat',
+                period: 'present',
+                description: 'Providing NLP consulting and development services to clients worldwide, specializing in chatbots, Agentic AI Solutions, and custom NLP solutions.',
               },
               {
-                role: 'Data Engineering Trainee',
-                company: 'Digital Egypt Pioneers (DEPI)',
-                period: 'Jul 2024 - Oct 2024',
-                description: 'Full-time training in data engineering, SQL, Python, and MLOps tools.',
-              },
-              {
-                role: 'BI Development Trainee',
-                company: 'Information Technology Institute (ITI)',
-                period: 'Jul 2024 - Sep 2024',
-                description: 'Training in data warehousing, SQL, Power BI, and business intelligence.',
-              },
+                role: 'AI Researcher',
+                company: 'AIN Shams University',
+                period: 'Feb 2026 - present',
+                description: 'Conducted research on LLMs, RAG, and AI agents. Developed prototypes and contributed to AI strategy development',
+              }
             ].map((exp, index) => (
               <div key={index} className="flex gap-4 md:gap-8">
                 <div className="flex flex-col items-center">
@@ -568,7 +562,7 @@ function ProjectsSection() {
         'Semantic search with optimized embeddings',
       ],
       github: 'https://github.com/MO7AMED3TWAN',
-      demo: '#',
+      demo: '/',
     },
     {
       title: 'Arabic Speech Recognition',
@@ -583,7 +577,7 @@ function ProjectsSection() {
         'Real-time transcription capabilities',
       ],
       github: 'https://github.com/MO7AMED3TWAN/MTC-AIC2',
-      demo: '#',
+      demo: '/',
     },
     {
       title: 'Supply Chain AI Solution',
@@ -598,7 +592,7 @@ function ProjectsSection() {
         'Automated reorder point calculation',
       ],
       github: 'https://github.com/MO7AMED3TWAN',
-      demo: '#',
+      demo: '/',
     },
   ];
 
@@ -763,7 +757,7 @@ function TestimonialsSection() {
       rating: 5,
     },
     {
-      name: 'Sarah Johnson',
+      name:   'Sarah Johnson',
       role: 'Tech Lead, DataFlow AI',
       content: 'Exceptional expertise in NLP and machine learning. Mohamed delivered a chatbot solution that exceeded our expectations. His attention to detail and problem-solving skills are outstanding.',
       rating: 5,
