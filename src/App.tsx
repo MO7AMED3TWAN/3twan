@@ -182,11 +182,12 @@ function HeroSection({ theme }: { theme: string }) {
   }, [heroImages.length]);
 
   return (
-    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
-      theme === 'light' ? 'bg-gradient-to-b from-gray-50 to-white' : ''
-    }`}>
+  <section className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
+    theme === 'light' ? 'bg-gradient-to-b from-gray-50 to-white' : ''
+  }`}>
+      
       {/* Background Images with Overlay */}
-      {theme === 'dark' && heroImages.map((img, index) => (
+      {heroImages.map((img, index) => (
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -254,7 +255,7 @@ function HeroSection({ theme }: { theme: string }) {
             </Button>
           </a>
           <a href="#contact">
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-8 py-6 text-lg">
+            <Button size="lg" variant="outline" className={`border-white/20 text-white hover:bg-black/80 rounded-full px-8 py-6 text-lg ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>
               Get In Touch
             </Button>
           </a>
@@ -542,7 +543,7 @@ function ServicesSection({ theme }: { theme: string }) {
   ];
 
   return (
-    <section id="services" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-white' : ''}`}>
+    <section id="services" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-[#F9FAFB]' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -730,10 +731,10 @@ function ProjectsSection({ theme }: { theme: string }) {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#654aff] transition-colors">
+                <h3 className={`text-xl font-bold mb-2 group-hover:text-[#654aff] transition-colors ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                   {project.title}
                 </h3>
-                <p className="text-white/60 text-sm line-clamp-2 mb-4">{project.description}</p>
+                <p className={`text-sm line-clamp-2 mb-4 ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{project.description}</p>
                 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2">
@@ -773,12 +774,16 @@ function ProjectsSection({ theme }: { theme: string }) {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-3xl bg-black/95 border-white/10 text-white max-h-[90vh] overflow-y-auto">
+        <DialogContent className={`max-w-3xl max-h-[90vh] overflow-y-auto ${
+          theme === 'dark'
+            ? 'bg-black/95 border-white/10 text-white'
+            : 'bg-white border-black/10 text-black'
+        }`}>
           {selectedProject && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-2xl font-bold">{selectedProject.title}</DialogTitle>
-                <DialogDescription className="text-white/60">{selectedProject.category}</DialogDescription>
+                <DialogTitle className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{selectedProject.title}</DialogTitle>
+                <DialogDescription className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>{selectedProject.category}</DialogDescription>
               </DialogHeader>
               
               <div className="mt-4">
@@ -788,19 +793,19 @@ function ProjectsSection({ theme }: { theme: string }) {
                   className="w-full h-64 object-cover rounded-xl mb-6"
                 />
                 
-                <p className="text-white/80 leading-relaxed mb-6">{selectedProject.description}</p>
+                <p className={`leading-relaxed mb-6 ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>{selectedProject.description}</p>
                 
-                <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
+                <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Key Features</h4>
                 <ul className="space-y-2 mb-6">
                   {selectedProject.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle2 className="w-5 h-5 text-[#654aff] flex-shrink-0 mt-0.5" />
-                      <span className="text-white/70">{feature}</span>
+                      <span className={theme === 'dark' ? 'text-white/70' : 'text-black/70'}>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 
-                <h4 className="text-lg font-semibold text-white mb-3">Technologies</h4>
+                <h4 className={`text-lg font-semibold mb-3 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Technologies</h4>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {selectedProject.technologies.map((tech) => (
                     <span key={tech} className="px-3 py-1.5 rounded-full bg-[#654aff]/20 text-[#654aff] text-sm">
@@ -817,7 +822,7 @@ function ProjectsSection({ theme }: { theme: string }) {
                     </Button>
                   </a>
                   <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                    <Button variant="outline" className={theme === 'dark' ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/10'}>
                       <ExternalLink className="w-4 h-4 mr-2" />
                       Live Demo
                     </Button>
@@ -866,7 +871,7 @@ function TestimonialsSection({ theme }: { theme: string }) {
   ];
 
   return (
-    <section className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-white' : ''}`}>
+    <section className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-[#F9FAFB]' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -1128,7 +1133,11 @@ function BlogSection({ theme }: { theme: string }) {
 
       {/* Article Dialog */}
       <Dialog open={!!selectedArticle} onOpenChange={() => setSelectedArticle(null)}>
-        <DialogContent className="max-w-4xl bg-black/95 border-white/10 text-white max-h-[90vh] overflow-y-auto">
+        <DialogContent className={`max-w-4xl max-h-[90vh] overflow-y-auto ${
+          theme === 'dark' 
+            ? 'bg-black/95 border-white/10 text-white' 
+            : 'bg-white border-black/10 text-black'
+        }`}>
           {selectedArticle && (
             <>
               <DialogHeader>
@@ -1136,11 +1145,11 @@ function BlogSection({ theme }: { theme: string }) {
                   <span className="px-3 py-1 rounded-full bg-[#654aff]/20 text-[#654aff] text-xs">
                     {selectedArticle.category}
                   </span>
-                  <span className="text-white/50 text-sm">{selectedArticle.date}</span>
-                  <span className="text-white/50 text-sm">•</span>
-                  <span className="text-white/50 text-sm">{selectedArticle.readTime}</span>
+                  <span className={`text-sm ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>{selectedArticle.date}</span>
+                  <span className={`text-sm ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>•</span>
+                  <span className={`text-sm ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>{selectedArticle.readTime}</span>
                 </div>
-                <DialogTitle className="text-2xl md:text-3xl font-bold">{selectedArticle.title}</DialogTitle>
+                <DialogTitle className={`text-2xl md:text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{selectedArticle.title}</DialogTitle>
               </DialogHeader>
               
               <div className="mt-4">
@@ -1151,7 +1160,8 @@ function BlogSection({ theme }: { theme: string }) {
                 />
                 
                 <div 
-                  className="prose prose-invert max-w-none"
+                  className={`${theme === 'dark' ? 'text-white/95' : 'text-black/95'}`}
+                
                   dangerouslySetInnerHTML={{ __html: selectedArticle.content }}
                 />
               </div>
@@ -1292,7 +1302,7 @@ function ContactSection({ theme }: { theme: string }) {
   };
 
   return (
-    <section id="contact" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-white' : ''}`}>
+    <section id="contact" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-[#F9FAFB]' : ''}`}>
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[200px] ${
@@ -1604,8 +1614,8 @@ function App() {
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       theme === 'dark'
-        ? 'bg-black text-white noise-overlay'
-        : 'bg-white text-black'
+        ? 'bg-black text-white noise-overlay dark'
+        : 'bg-[#F9FAFB] text-black light'
     }`}>
       <Navigation theme={theme} setTheme={setTheme} />
       <main>
