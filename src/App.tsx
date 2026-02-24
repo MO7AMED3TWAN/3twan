@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { 
   Menu, X, Github, Linkedin, Mail, Phone, ArrowRight, 
-  Brain, MessageSquare, Bot, Workflow, Cpu, Database, 
+  Brain, MessageSquare, Bot, Workflow, Cpu, 
   Cloud, Code2, Sparkles, ChevronRight, ExternalLink, 
   Calendar, Send, Quote, Star, BookOpen,
   Layers, Zap, Target, CheckCircle2
