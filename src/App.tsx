@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { 
-  Menu, X, Github, Linkedin, Mail, Phone, ArrowRight, ArrowUp,
+  Menu, X, Github, Linkedin, Mail, Phone, ArrowRight, ArrowUp, Moon, Sun,
   Brain, MessageSquare, Bot, Workflow, Cpu, 
   Cloud, Code2, Sparkles, ChevronRight, ExternalLink, 
   Calendar, Send, Quote, Star, BookOpen,
@@ -26,7 +26,7 @@ import blog2Img from '@/assets/images/blog-2.svg';
 import blog3Img from '@/assets/images/blog-3.svg';
 
 // Navigation Component
-function Navigation() {
+function Navigation({ theme, setTheme }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -47,18 +47,28 @@ function Navigation() {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/10' : 'bg-transparent'
+      isScrolled 
+        ? theme === 'dark'
+          ? 'bg-black/80 backdrop-blur-xl border-b border-white/10'
+          : 'bg-white/80 backdrop-blur-xl border-b border-black/10'
+        : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Brain className="w-5 h-5 text-white" />
+            <div className={`w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center group-hover:scale-110 transition-transform`}>
+              <Brain className={`w-5 h-5 ${theme === 'dark' ? 'text-white' : 'text-white'}`} />
             </div>
-            <span className="text-xl font-bold text-white">3twan<span className="text-[#654aff]">.</span>com</span>
+            <span className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>3twan<span className="text-[#654aff]">.</span>com</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -67,7 +77,9 @@ function Navigation() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm text-white/70 hover:text-white transition-colors relative group"
+                className={`text-sm transition-colors relative group ${
+                  theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-black/70 hover:text-black'
+                }`}
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#654aff] transition-all group-hover:w-full" />
@@ -75,8 +87,22 @@ function Navigation() {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Buttons Container */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-colors ${
+                theme === 'dark'
+                  ? 'bg-white/10 hover:bg-white/20 text-white'
+                  : 'bg-black/10 hover:bg-black/20 text-black'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+
+            {/* CTA Button */}
             <a href="#contact">
               <Button className="bg-[#654aff] hover:bg-[#7c5cff] text-white rounded-full px-6">
                 Let's Talk
@@ -84,25 +110,44 @@ function Navigation() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Menu & Theme Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-colors ${
+                theme === 'dark'
+                  ? 'bg-white/10 hover:bg-white/20 text-white'
+                  : 'bg-black/10 hover:bg-black/20 text-black'
+              }`}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button
+              className={`p-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10">
+        <div className={`md:hidden backdrop-blur-xl border-b ${
+          theme === 'dark'
+            ? 'bg-black/95 border-white/10'
+            : 'bg-white/95 border-black/10'
+        }`}>
           <div className="px-4 py-6 space-y-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="block text-lg text-white/70 hover:text-white transition-colors"
+                className={`block text-lg transition-colors ${
+                  theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-black/70 hover:text-black'
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
@@ -121,7 +166,7 @@ function Navigation() {
 }
 
 // Hero Section
-function HeroSection() {
+function HeroSection({ theme }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const heroImages = [
     hero1,
@@ -137,9 +182,11 @@ function HeroSection() {
   }, [heroImages.length]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
+      theme === 'light' ? 'bg-gradient-to-b from-gray-50 to-white' : ''
+    }`}>
       {/* Background Images with Overlay */}
-      {heroImages.map((img, index) => (
+      {theme === 'dark' && heroImages.map((img, index) => (
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -163,18 +210,24 @@ function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-float">
-          <Sparkles className="w-4 h-4 text-[#654aff]" />
-          <span className="text-sm text-white/80">Available for Freelance Projects</span>
+        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-float ${
+          theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+        }`}>
+          <Sparkles className={`w-4 h-4 ${theme === 'dark' ? 'text-[#654aff]' : 'text-[#654aff]'}`} />
+          <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>Available for Freelance Projects</span>
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+        <h1 className={`text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight ${
+          theme === 'dark' ? 'text-white' : 'text-black'
+        }`}>
           Mohamed <span className="text-gradient">Atwan</span>
         </h1>
 
         {/* Role */}
-        <p className="text-xl md:text-2xl lg:text-3xl text-white/80 mb-4 font-light">
+        <p className={`text-xl md:text-2xl lg:text-3xl mb-4 font-light ${
+          theme === 'dark' ? 'text-white/80' : 'text-black/80'
+        }`}>
           AI Engineer & NLP Specialist
         </p>
 
@@ -183,7 +236,9 @@ function HeroSection() {
           {['NLP', 'Agentic AI', 'AI Automation'].map((spec) => (
             <span 
               key={spec}
-              className="px-4 py-2 rounded-full glass text-sm text-white/70 border border-[#654aff]/30"
+              className={`px-4 py-2 rounded-full glass text-sm border border-[#654aff]/30 ${
+                theme === 'dark' ? 'text-white/70 bg-white/10' : 'text-black/70 bg-black/10'
+              }`}
             >
               {spec}
             </span>
@@ -214,32 +269,34 @@ function HeroSection() {
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-gradient mb-1">{stat.value}</div>
-              <div className="text-sm text-white/60">{stat.label}</div>
+              <div className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{stat.label}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-        {heroImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              index === currentSlide ? 'w-8 bg-[#654aff]' : 'bg-white/30'
-            }`}
-          />
-        ))}
-      </div>
+      {theme === 'dark' && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === currentSlide ? 'w-8 bg-[#654aff]' : 'bg-white/30'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
 
 // About Section
-function AboutSection() {
+function AboutSection({ theme }) {
   return (
-    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="about" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-gray-50' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image */}
@@ -251,17 +308,17 @@ function AboutSection() {
                 alt="Mohamed Atwan"
                 className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className={`absolute inset-0 bg-gradient-to-t ${theme === 'dark' ? 'from-black/60 to-transparent' : 'from-black/40 to-transparent'}`} />
               
               {/* Floating Card */}
-              <div className="absolute bottom-6 left-6 right-6 glass rounded-2xl p-4">
+              <div className={`absolute bottom-6 left-6 right-6 glass rounded-2xl p-4 ${theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'}`}>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-[#654aff] flex items-center justify-center">
                     <Brain className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">AI Engineer</div>
-                    <div className="text-white/60 text-sm">Huawei Cloud Ecosystem</div>
+                    <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>AI Engineer</div>
+                    <div className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>Huawei Cloud Ecosystem</div>
                   </div>
                 </div>
               </div>
@@ -270,31 +327,31 @@ function AboutSection() {
 
           {/* Content */}
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'}`}>
               <Target className="w-4 h-4 text-[#654aff]" />
-              <span className="text-sm text-white/80">About Me</span>
+              <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>About Me</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               We Can Change The World <span className="text-gradient">Through Data</span>
             </h2>
 
-            <div className="space-y-4 text-white/70 leading-relaxed">
+            <div className={`space-y-4 leading-relaxed ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>
               <p>
-                Results-driven Data Scientist with <strong className="text-white">2 years</strong> of experience in 
-                <strong className="text-white"> Machine Learning</strong>, <strong className="text-white">Deep Learning</strong>, 
-                <strong className="text-white"> Natural Language Processing</strong>, and <strong className="text-white">Data Science</strong>. 
-                Skilled in extracting insights and building data-driven solutions with a focus on <strong className="text-white">Agentic AI & LLMs</strong>.
+                Results-driven Data Scientist with <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>2 years</strong> of experience in 
+                <strong className={theme === 'dark' ? 'text-white' : 'text-black'}> Machine Learning</strong>, <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>Deep Learning</strong>, 
+                <strong className={theme === 'dark' ? 'text-white' : 'text-black'}> Natural Language Processing</strong>, and <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>Data Science</strong>. 
+                Skilled in extracting insights and building data-driven solutions with a focus on <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>Agentic AI & LLMs</strong>.
               </p>
               <p>
-                Proven track record of leading teams to success, including achieving <strong className="text-white">Top 5 in MTC-AIC2 AI Competition</strong> 
-                for Speech Recognition Systems and <strong className="text-white">Top 8 in Huawei Spark Infinity North Africa 2024</strong> 
+                Proven track record of leading teams to success, including achieving <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>Top 5 in MTC-AIC2 AI Competition</strong> 
+                for Speech Recognition Systems and <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>Top 8 in Huawei Spark Infinity North Africa 2024</strong> 
                 for Supply Chain AI Solutions.
               </p>
               <p>
-                Currently working as an <strong className="text-white">AI Engineer at Huawei Cloud Ecosystem</strong>, 
+                Currently working as an <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>AI Engineer at Huawei Cloud Ecosystem</strong>, 
                 developing end-to-end AI solutions and NLP systems. Also serving as a 
-                <strong className="text-white"> Huawei Cloud Developer Group (HCDG) Organizer</strong>, 
+                <strong className={theme === 'dark' ? 'text-white' : 'text-black'}> Huawei Cloud Developer Group (HCDG) Organizer</strong>, 
                 fostering collaboration and innovation in the tech community.
               </p>
             </div>
@@ -309,7 +366,7 @@ function AboutSection() {
               ].map((achievement) => (
                 <div key={achievement} className="flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-[#654aff] flex-shrink-0" />
-                  <span className="text-sm text-white/70">{achievement}</span>
+                  <span className={`text-sm ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>{achievement}</span>
                 </div>
               ))}
             </div>
@@ -321,7 +378,7 @@ function AboutSection() {
 }
 
 // Skills Section
-function SkillsSection() {
+function SkillsSection({ theme }) {
   const skillCategories = [
     {
       title: 'AI Technologies',
@@ -444,7 +501,7 @@ function SkillsSection() {
 }
 
 // Services Section
-function ServicesSection() {
+function ServicesSection({ theme }) {
   const [activeService, setActiveService] = useState(0);
 
   const services = [
@@ -545,7 +602,7 @@ function ServicesSection() {
 }
 
 // Projects Section
-function ProjectsSection() {
+function ProjectsSection({ theme }) {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
 
   const projects = [
@@ -748,7 +805,7 @@ function ProjectsSection() {
 }
 
 // Testimonials Section
-function TestimonialsSection() {
+function TestimonialsSection({ theme }) {
   const testimonials = [
     {
       name: 'Ahmed Hassan',
@@ -820,7 +877,7 @@ function TestimonialsSection() {
 }
 
 // Blog Section
-function BlogSection() {
+function BlogSection({ theme }) {
   const [selectedArticle, setSelectedArticle] = useState<typeof articles[0] | null>(null);
 
   const articles = [
@@ -1053,7 +1110,7 @@ function BlogSection() {
 }
 
 // Contact Section
-function ContactSection() {
+function ContactSection({ theme }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -1181,36 +1238,40 @@ function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="contact" className={`py-24 md:py-32 relative overflow-hidden ${theme === 'light' ? 'bg-white' : ''}`}>
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#654aff]/10 rounded-full blur-[200px]" />
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[200px] ${
+          theme === 'dark' ? 'bg-[#654aff]/10' : 'bg-[#654aff]/5'
+        }`} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 ${
+            theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          }`}>
             <Send className="w-4 h-4 text-[#654aff]" />
-            <span className="text-sm text-white/80">Get In Touch</span>
+            <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>Get In Touch</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
             Let's Work <span className="text-gradient">Together</span>
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
+          <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
             Have a project in mind? Let's discuss how I can help bring your AI vision to life.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="glass rounded-2xl p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">Book a Consultation</h3>
+          <div className={`glass rounded-2xl p-8 ${theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'}`}>
+            <h3 className={`text-2xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Book a Consultation</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-white/70 text-sm mb-2">
+                  <label className={`block text-sm mb-2 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>
                     Your Name
                     {errors.name && <span className="text-red-400 ml-1">*</span>}
                   </label>
@@ -1220,7 +1281,7 @@ function ContactSection() {
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] transition-colors ${
+                    className={`${theme === 'dark' ? 'bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff]' : 'bg-black/5 border-black/10 text-black placeholder:text-black/30 focus:border-[#654aff]'} transition-colors ${
                       errors.name ? 'border-red-500/50 focus:border-red-500' : ''
                     }`}
                     required
@@ -1230,7 +1291,7 @@ function ContactSection() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-white/70 text-sm mb-2">
+                  <label className={`block text-sm mb-2 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>
                     Email Address
                     {errors.email && <span className="text-red-400 ml-1">*</span>}
                   </label>
@@ -1240,7 +1301,7 @@ function ContactSection() {
                     placeholder="john@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] transition-colors ${
+                    className={`${theme === 'dark' ? 'bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff]' : 'bg-black/5 border-black/10 text-black placeholder:text-black/30 focus:border-[#654aff]'} transition-colors ${
                       errors.email ? 'border-red-500/50 focus:border-red-500' : ''
                     }`}
                     required
@@ -1252,7 +1313,7 @@ function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-white/70 text-sm mb-2">
+                <label className={`block text-sm mb-2 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>
                   Project Type
                   {errors.projectType && <span className="text-red-400 ml-1">*</span>}
                 </label>
@@ -1260,16 +1321,16 @@ function ContactSection() {
                   name="projectType"
                   value={formData.projectType}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-md bg-white/5 border border-white/10 text-white focus:border-[#654aff] focus:outline-none transition-colors ${
+                  className={`w-full px-4 py-2 rounded-md ${theme === 'dark' ? 'bg-white/5 border-white/10 text-white focus:border-[#654aff] focus:outline-none' : 'bg-black/5 border-black/10 text-black focus:border-[#654aff] focus:outline-none'} transition-colors ${
                     errors.projectType ? 'border-red-500/50 focus:border-red-500' : ''
                   }`}
                   required
                 >
-                  <option value="" className="bg-black">Select a service</option>
-                  <option value="AI Strategy Consulting" className="bg-black">AI Strategy Consulting</option>
-                  <option value="NLP Solutions" className="bg-black">NLP Solutions</option>
-                  <option value="AI Automation" className="bg-black">AI Automation</option>
-                  <option value="Other" className="bg-black">Other</option>
+                  <option value="" className={theme === 'dark' ? 'bg-black' : 'bg-white'}>Select a service</option>
+                  <option value="AI Strategy Consulting" className={theme === 'dark' ? 'bg-black' : 'bg-white'}>AI Strategy Consulting</option>
+                  <option value="NLP Solutions" className={theme === 'dark' ? 'bg-black' : 'bg-white'}>NLP Solutions</option>
+                  <option value="AI Automation" className={theme === 'dark' ? 'bg-black' : 'bg-white'}>AI Automation</option>
+                  <option value="Other" className={theme === 'dark' ? 'bg-black' : 'bg-white'}>Other</option>
                 </select>
                 {errors.projectType && (
                   <p className="text-red-400 text-xs mt-1">{errors.projectType}</p>
@@ -1277,18 +1338,18 @@ function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-white/70 text-sm mb-2">Preferred Meeting Date (Optional)</label>
+                <label className={`block text-sm mb-2 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>Preferred Meeting Date (Optional)</label>
                 <Input
                   type="date"
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
-                  className="bg-white/5 border-white/10 text-white focus:border-[#654aff]"
+                  className={theme === 'dark' ? 'bg-white/5 border-white/10 text-white focus:border-[#654aff]' : 'bg-black/5 border-black/10 text-black focus:border-[#654aff]'}
                 />
               </div>
 
               <div>
-                <label className="block text-white/70 text-sm mb-2">
+                <label className={`block text-sm mb-2 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>
                   Project Details
                   {errors.message && <span className="text-red-400 ml-1">*</span>}
                 </label>
@@ -1297,7 +1358,7 @@ function ContactSection() {
                   placeholder="Tell me about your project, goals, and timeline..."
                   value={formData.message}
                   onChange={handleChange}
-                  className={`bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff] min-h-[120px] transition-colors ${
+                  className={`${theme === 'dark' ? 'bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-[#654aff]' : 'bg-black/5 border-black/10 text-black placeholder:text-black/30 focus:border-[#654aff]'} min-h-[120px] transition-colors ${
                     errors.message ? 'border-red-500/50 focus:border-red-500' : ''
                   }`}
                   required
@@ -1306,7 +1367,7 @@ function ContactSection() {
                   {errors.message && (
                     <p className="text-red-400 text-xs">{errors.message}</p>
                   )}
-                  <p className="text-white/40 text-xs ml-auto">
+                  <p className={`text-xs ml-auto ${theme === 'dark' ? 'text-white/40' : 'text-black/40'}`}>
                     {formData.message.length}/500 characters
                   </p>
                 </div>
@@ -1335,8 +1396,8 @@ function ContactSection() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
-              <p className="text-white/60 mb-8">
+              <h3 className={`text-2xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Contact Information</h3>
+              <p className={theme === 'dark' ? 'text-white/60' : 'text-black/60'}>
                 Feel free to reach out through any of these channels. I'm always excited to discuss new projects and opportunities.
               </p>
             </div>
@@ -1353,27 +1414,37 @@ function ContactSection() {
                   href={contact.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 glass rounded-xl hover:border-[#654aff]/50 transition-all group"
+                  className={`flex items-center gap-4 p-4 glass rounded-xl transition-all group ${
+                    theme === 'dark' 
+                      ? 'bg-white/10 border-white/20 hover:border-[#654aff]/50' 
+                      : 'bg-black/10 border-black/20 hover:border-[#654aff]/50'
+                  }`}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#654aff]/20 flex items-center justify-center group-hover:bg-[#654aff] transition-colors">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center group-hover:bg-[#654aff] transition-colors ${
+                    theme === 'dark' ? 'bg-[#654aff]/20' : 'bg-[#654aff]/20'
+                  }`}>
                     <contact.icon className="w-5 h-5 text-[#654aff] group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <div className="text-white/50 text-sm">{contact.label}</div>
-                    <div className="text-white font-medium">{contact.value}</div>
+                    <div className={`text-sm ${theme === 'dark' ? 'text-white/50' : 'text-black/50'}`}>{contact.label}</div>
+                    <div className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{contact.value}</div>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-white/30 ml-auto group-hover:text-[#654aff] group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className={`w-5 h-5 ml-auto group-hover:translate-x-1 transition-all ${
+                    theme === 'dark' 
+                      ? 'text-white/30 group-hover:text-[#654aff]' 
+                      : 'text-black/30 group-hover:text-[#654aff]'
+                  }`} />
                 </a>
               ))}
             </div>
 
             {/* Availability Status */}
-            <div className="glass rounded-xl p-6 border border-green-500/30">
+            <div className={`glass rounded-xl p-6 border border-green-500/30 ${theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'}`}>
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-white font-medium">Available for new projects</span>
+                <span className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Available for new projects</span>
               </div>
-              <p className="text-white/60 text-sm mt-2">
+              <p className={`text-sm mt-2 ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>
                 Currently accepting freelance work and consulting opportunities.
               </p>
             </div>
@@ -1385,9 +1456,9 @@ function ContactSection() {
 }
 
 // Footer
-function Footer() {
+function Footer({ theme }) {
   return (
-    <footer className="py-12 border-t border-white/10">
+    <footer className={`py-12 border-t ${theme === 'dark' ? 'border-white/10 bg-black' : 'border-black/10 bg-gray-50'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
@@ -1395,7 +1466,7 @@ function Footer() {
             <div className="w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center">
               <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">Mohamed<span className="text-[#654aff]">.</span>ATWAN</span>
+            <span className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Mohamed<span className="text-[#654aff]">.</span>ATWAN</span>
           </div>
 
           {/* Quick Links */}
@@ -1404,7 +1475,7 @@ function Footer() {
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
-                className="text-white/50 hover:text-white transition-colors text-sm"
+                className={`transition-colors text-sm ${theme === 'dark' ? 'text-white/50 hover:text-white' : 'text-black/50 hover:text-black'}`}
               >
                 {link}
               </a>
@@ -1413,21 +1484,21 @@ function Footer() {
 
           {/* Social Links */}
           <div className="flex items-center gap-4">
-            <a href="https://github.com/MO7AMED3TWAN" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-[#654aff]/20 transition-colors">
-              <Github className="w-5 h-5 text-white/70" />
+            <a href="https://github.com/MO7AMED3TWAN" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-[#654aff]/20 transition-colors ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
+              <Github className={`w-5 h-5 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`} />
             </a>
-            <a href="https://www.linkedin.com/in/mo7amed3twan/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-[#654aff]/20 transition-colors">
-              <Linkedin className="w-5 h-5 text-white/70" />
+            <a href="https://www.linkedin.com/in/mo7amed3twan/" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-[#654aff]/20 transition-colors ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
+              <Linkedin className={`w-5 h-5 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`} />
             </a>
-            <a href="mailto:Mo7amed3twan@gmail.com" className="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-[#654aff]/20 transition-colors">
-              <Mail className="w-5 h-5 text-white/70" />
+            <a href="mailto:Mo7amed3twan@gmail.com" className={`w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-[#654aff]/20 transition-colors ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
+              <Mail className={`w-5 h-5 ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`} />
             </a>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-white/5 text-center">
-          <p className="text-white/40 text-sm">
+        <div className={`mt-8 pt-8 border-t text-center ${theme === 'dark' ? 'border-white/5' : 'border-black/5'}`}>
+          <p className={`text-sm ${theme === 'dark' ? 'text-white/40' : 'text-black/40'}`}>
             © {new Date().getFullYear()} Mohamed Atwan. All rights reserved. Built with passion for AI.
           </p>
         </div>
@@ -1437,7 +1508,7 @@ function Footer() {
 }
 
 // Scroll to Top Button Component
-function ScrollToTopButton() {
+function ScrollToTopButton({ theme }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -1471,21 +1542,30 @@ function ScrollToTopButton() {
 
 // Main App Component
 function App() {
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme || 'dark';
+  });
+
   return (
-    <div className="min-h-screen bg-black text-white noise-overlay">
-      <Navigation />
+    <div className={`min-h-screen transition-colors duration-300 ${
+      theme === 'dark'
+        ? 'bg-black text-white noise-overlay'
+        : 'bg-white text-black'
+    }`}>
+      <Navigation theme={theme} setTheme={setTheme} />
       <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <TestimonialsSection />
-        <BlogSection />
-        <ContactSection />
+        <HeroSection theme={theme} />
+        <AboutSection theme={theme} />
+        <SkillsSection theme={theme} />
+        <ServicesSection theme={theme} />
+        <ProjectsSection theme={theme} />
+        <TestimonialsSection theme={theme} />
+        <BlogSection theme={theme} />
+        <ContactSection theme={theme} />
       </main>
-      <Footer />
-      <ScrollToTopButton />
+      <Footer theme={theme} />
+      <ScrollToTopButton theme={theme} />
     </div>
   );
 }
