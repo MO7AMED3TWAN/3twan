@@ -836,21 +836,31 @@ function ProjectsSection({ theme }: { theme: string }) {
 function TestimonialsSection({ theme }: { theme: string }) {
   const testimonials = [
     {
-      name: 'Ahmed Hassan',
-      role: 'CEO, TechStart Inc.',
-      content: 'Mohamed\'s AI solutions transformed our business operations completely. His expertise in NLP helped us automate customer support, reducing response time by 80%. Highly recommended!',
+      name: 'Dr. Samar Elbedwehy',
+      role: 'Lecturer, Kafr Elsheikh Uni.',
+      content:
+        "I highly recommend Mohamed Atwan for any opportunity in NLP or Speech Recognition. As his supervisor, I was consistently impressed by his deep technical expertise, creativity, and ability to work independently on complex projects. He is highly proficient with modern tools like PyTorch and HuggingFace and combines strong analytical skills with a solid understanding of linguistics. Professional, reliable, and intellectually curious, Mohamed would be a valuable asset to any team.",
       rating: 5,
     },
     {
-      name:   'Sarah Johnson',
-      role: 'Tech Lead, DataFlow AI',
-      content: 'Exceptional expertise in NLP and machine learning. Mohamed delivered a chatbot solution that exceeded our expectations. His attention to detail and problem-solving skills are outstanding.',
+      name: 'Eng. Ahmed Hisham',
+      role: 'Creator of Responify.com',
+      content:
+        "I had the pleasure of mentoring Mohammed Atwan in my Data Science course, and he stood out for his dedication and passion for learning. He consistently went above and beyond to master concepts and delivered an outstanding final project. Mohammed applied his skills with precision, analyzing complex data and presenting clear, meaningful insights. His hard work and determination were evident in the results he achieved. I highly recommend Mohammed to any team looking for a committed and skilled data scientist.",
       rating: 5,
     },
     {
-      name: 'Mohamed Ali',
-      role: 'Founder, InnovateTech',
-      content: 'Working with Mohamed was a game-changer for our startup. He delivered beyond expectations on every milestone. His deep understanding of AI and commitment to quality is rare to find.',
+      name: 'Eng. Mohamed Gomma',
+      role: 'Co-founder & CEO of Daturial',
+      content:
+        "I had the pleasure of mentoring Mohamed Atwan in the Digital Egypt Pioneers Initiative, where he excelled as a Team Leader in a Data Engineering project. He demonstrated strong leadership and technical skills, guiding his team to success and applying data engineering concepts with creativity and precision. Mohamed’s ability to communicate clearly, support his teammates, and tackle challenges proactively was impressive. His dedication to learning and strong work ethic make him a valuable asset. I highly recommend him for any role requiring leadership and technical expertise.",
+      rating: 5,
+    },
+    {
+      name: 'Eng. Hossam Allam Allam',
+      role: 'CEO of Integrated Training Academy (ITA)',
+      content:
+        "It’s a pleasure to recommend Mohamed, a highly skilled Data Scientist and AI Instructor. I’ve seen how he makes complex topics like machine learning and deep learning accessible and inspiring. He combines deep technical expertise with an engaging teaching style, using tools like Python, Power BI, and TensorFlow to bridge theory and practice. Beyond his technical skills, Mohamed truly cares about his students' growth—explaining concepts clearly and encouraging critical thinking. I highly recommend him for any opportunity in Data Science and Artificial Intelligence.",
       rating: 5,
     },
   ];
