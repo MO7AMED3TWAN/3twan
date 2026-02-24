@@ -326,27 +326,22 @@ function SkillsSection() {
     {
       title: 'AI Technologies',
       icon: Brain,
-      skills: ['Machine Learning', 'Deep Learning', 'NLP', 'TTS', 'STT', 'LLMs'],
+      skills: ['Machine Learning', 'Deep Learning', 'NLP', 'TTS', 'STT', 'LLMs', "Agentic AI", 'RAG', 'Fine-tuning', 'Prompt Engineering'],
     },
     {
-      title: 'Programming Languages',
+      title: 'Programming',
       icon: Code2,
-      skills: ['Python'],
+      skills: ['Python', "javaScript", "SQL", 'Bash', 'HTML/CSS', "Git", 'Linux'],
     },
     {
       title: 'Frameworks & Tools',
       icon: Code2,
-      skills: ['PyTorch', 'TensorFlow', 'Mindspore', 'Hugging Face', 'LangChain', 'Transformers', 'OpenAI', 'FastAPI', 'django', 'Qdrant', 'Milvus', 'Faiss', 'pinecone'],
+      skills: ['PyTorch', 'TensorFlow', 'Mindspore', 'Hugging Face', 'LangChain', 'Transformers', 'OpenAI', 'FastAPI', "Restfull API", 'django', 'Flask', 'Streamlit', 'Gradio', 'Qdrant', 'Milvus', 'Faiss', 'pinecone', 'W&b', 'TensorBoard', 'Jupyter'],
     },
     {
       title: 'Cloud & MLOps',
       icon: Cloud,
-      skills: ['Huawei Cloud', 'Azure', 'Docker', 'Kubernetes', 'MLflow', 'Git/GitHub', 'Linux', 'Bash'],
-    },
-    {
-      title: 'Data & Databases',
-      icon: Database,
-      skills: ['SQL', 'Pandas', 'NumPy', 'Vector DBs', 'ETL Pipelines'],
+      skills: ['Huawei Cloud', 'Azure', 'Docker', 'MLflow', 'Git/GitHub', 'CI/CD', 'Cloud-Native AI', 'AI Model Deployment', 'AI Model Monitoring', 'AI Model Scaling'],
     },
   ];
 
