@@ -17,6 +17,10 @@ import './App.css';
 import hero1 from '@/assets/images/hero-1.jpg';
 import hero2 from '@/assets/images/hero-2.jpg';
 import hero3 from '@/assets/images/hero-3.jpg';
+// light‑mode versions – add your own files to this path or update names
+import hero1Light from '@/assets/images/hero-11.jpg';
+import hero2Light from '@/assets/images/hero-22.jpg';
+import hero3Light from '@/assets/images/hero-33.jpg';
 import aboutImg from '@/assets/images/about.jpg';
 import project1Img from '@/assets/images/project-1.jpg';
 import project2Img from '@/assets/images/project-2.jpg';
@@ -72,13 +76,13 @@ function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: stri
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 bg-gradient-to-r from-[#654aff]/20 to-purple-600/30 rounded-full px-6 py-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 className={`text-sm transition-colors relative group ${
-                  theme === 'dark' ? 'text-white/70 hover:text-white' : 'text-black/70 hover:text-black'
+                  theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-black/90 hover:text-black'
                 }`}
               >
                 {link.name}
@@ -168,11 +172,10 @@ function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: stri
 // Hero Section
 function HeroSection({ theme }: { theme: string }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const heroImages = [
-    hero1,
-    hero2,
-    hero3,
-  ];
+  // choose a different trio when the light theme is active
+  const heroImagesDark = [hero1, hero2, hero3];
+  const heroImagesLight = [hero1Light, hero2Light, hero3Light];
+  const heroImages = theme === 'light' ? heroImagesLight : heroImagesDark;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -183,7 +186,7 @@ function HeroSection({ theme }: { theme: string }) {
 
   return (
   <section className={`relative min-h-screen flex items-center justify-center overflow-hidden ${
-    theme === 'light' ? 'bg-gradient-to-b from-gray-50 to-white' : ''
+    theme === 'light' ? '' : ''
   }`}>
       
       {/* Background Images with Overlay */}
@@ -198,7 +201,7 @@ function HeroSection({ theme }: { theme: string }) {
             className="absolute inset-0 bg-cover bg-center transform scale-105"
             style={{ backgroundImage: `url(${img})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+          <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-gradient-to-b from-black/70 via-black/50 to-black' : 'bg-gradient-to-b from-black/20 via-black/10 to-black'}`} />
         </div>
       ))}
 
@@ -212,10 +215,10 @@ function HeroSection({ theme }: { theme: string }) {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         {/* Badge */}
         <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-float ${
-          theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+          theme === 'dark' ? 'bg-white/10 border-white/70' : 'bg-black/10 border-black/70'
         }`}>
           <Sparkles className={`w-4 h-4 ${theme === 'dark' ? 'text-[#654aff]' : 'text-[#654aff]'}`} />
-          <span className={`text-sm ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>Available for Freelance Projects</span>
+          <span className={`text-sm ${theme === 'dark' ? 'text-white/90' : 'text-black/90'}`}>Available for Freelance Projects</span>
         </div>
 
         {/* Main Heading */}
@@ -238,7 +241,7 @@ function HeroSection({ theme }: { theme: string }) {
             <span 
               key={spec}
               className={`px-4 py-2 rounded-full glass text-sm border border-[#654aff]/30 ${
-                theme === 'dark' ? 'text-white/70 bg-white/10' : 'text-black/70 bg-black/10'
+                theme === 'dark' ? 'text-white/70 bg-white/80' : 'text-black/70 bg-white/20'
               }`}
             >
               {spec}
@@ -270,7 +273,7 @@ function HeroSection({ theme }: { theme: string }) {
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-gradient mb-1">{stat.value}</div>
-              <div className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>{stat.label}</div>
+              <div className={`text-sm ${theme === 'dark' ? 'text-white/90' : 'text-white/90'}`}>{stat.label}</div>
             </div>
           ))}
         </div>
