@@ -14,20 +14,20 @@ import { toast } from 'sonner';
 import './App.css';
 
 // Import images
-import hero1 from '@/assets/images/hero-1.jpg';
-import hero2 from '@/assets/images/hero-2.jpg';
-import hero3 from '@/assets/images/hero-3.jpg';
+import hero1 from '/hero-1.jpg';
+import hero2 from '/hero-2.jpg';
+import hero3 from '/hero-3.jpg';
 // light‑mode versions – add your own files to this path or update names
-import hero1Light from '@/assets/images/hero-11.jpg';
-import hero2Light from '@/assets/images/hero-22.jpg';
-import hero3Light from '@/assets/images/hero-33.jpg';
-import aboutImg from '@/assets/images/about.jpg';
-import project1Img from '@/assets/images/project-1.jpg';
-import project2Img from '@/assets/images/project-2.jpg';
-import project3Img from '@/assets/images/project-3.jpg';
-import blog1Img from '@/assets/images/blog-1.svg';
-import blog2Img from '@/assets/images/blog-2.svg';
-import blog3Img from '@/assets/images/blog-3.svg';
+import hero1Light from '/hero-11.jpg';
+import hero2Light from '/hero-22.jpg';
+import hero3Light from '/hero-33.jpg';
+import aboutImg from '/about.jpg';
+import project1Img from '/project-1.jpg';
+import project2Img from '/project-2.jpg';
+import project3Img from '/project-3.jpg';
+import blog1Img from '/blog-1.svg';
+import blog2Img from '/blog-2.svg';
+import blog3Img from '/blog-3.svg';
 
 // Navigation Component
 function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: string) => void }) {
