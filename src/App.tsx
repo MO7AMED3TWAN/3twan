@@ -69,10 +69,13 @@ function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: stri
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <div className={`w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center group-hover:scale-110 transition-transform`}>
-              <Brain className={`w-5 h-5 ${theme === 'dark' ? 'text-white' : 'text-white'}`} />
-            </div>
-            <span className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>3twan<span className="text-[#654aff]">.</span>com</span>
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              width={30}  // Adjust width
+              height={30} // Adjust height
+              style={{ width: 'auto', height: '25px' }} // Or use inline styles
+            />
           </a>
 
           {/* Desktop Navigation */}
