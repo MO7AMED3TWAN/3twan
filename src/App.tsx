@@ -47,7 +47,7 @@ function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: stri
     { name: 'Skills', href: '#skills' },
     { name: 'Services', href: '#services' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Blog', href: '#blog' },
+    // { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -70,11 +70,11 @@ function Navigation({ theme, setTheme }: { theme: string; setTheme: (theme: stri
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
             <img 
-              src="/logo.png" 
+              src={theme === 'dark' ? '/logo.png' : '/logo1.png'}
               alt="Logo" 
-              width={30}  // Adjust width
-              height={30} // Adjust height
-              style={{ width: 'auto', height: '25px' }} // Or use inline styles
+              width={30}
+              height={30}
+              style={{ width: 'auto', height: '25px' }}
             />
           </a>
 
@@ -1533,15 +1533,20 @@ function Footer({ theme }: { theme: string }) {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-purple flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
-            </div>
-            <span className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Mohamed<span className="text-[#654aff]">.</span>ATWAN</span>
+          <a href="/" className="flex items-center gap-2 group">
+            <img 
+              src={theme === 'dark' ? '/logo.png' : '/logo1.png'}
+              alt="Logo" 
+              width={30}
+              height={30}
+              style={{ width: 'auto', height: '25px' }}
+            />
+          </a>
           </div>
 
           {/* Quick Links */}
           <div className="flex flex-wrap justify-center gap-6">
-            {['About', 'Skills', 'Services', 'Projects', 'Blog', 'Contact'].map((link) => (
+            {['About', 'Skills', 'Services', 'Projects', 'Contact'].map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
@@ -1569,7 +1574,7 @@ function Footer({ theme }: { theme: string }) {
         {/* Copyright */}
         <div className={`mt-8 pt-8 border-t text-center ${theme === 'dark' ? 'border-white/5' : 'border-black/5'}`}>
           <p className={`text-sm ${theme === 'dark' ? 'text-white/40' : 'text-black/40'}`}>
-            © {new Date().getFullYear()} Mohamed Atwan. All rights reserved. Built with passion for AI.
+            © {new Date().getFullYear()} Mohamed Atwan. All rights reserved.
           </p>
         </div>
       </div>
@@ -1631,7 +1636,7 @@ function App() {
         <ServicesSection theme={theme} />
         <ProjectsSection theme={theme} />
         <TestimonialsSection theme={theme} />
-        <BlogSection theme={theme} />
+        {/* <BlogSection theme={theme} /> */}
         <ContactSection theme={theme} />
       </main>
       <Footer theme={theme} />
