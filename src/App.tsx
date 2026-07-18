@@ -477,9 +477,15 @@ function SkillsSection({ theme }: { theme: string }) {
           <div className="space-y-6">
             {[
               {
+                role: 'AI Engineer (New Team Transition)',
+                company: 'Huawei Cloud Ecosystem',
+                period: 'Jul 2026 - Present',
+                description: 'Transitioned to a new internal team within the ecosystem, expanding focus on advanced AI integrations and specialized cloud solutions.',
+              },
+              {
                 role: 'AI Engineer',
                 company: 'Huawei Cloud Ecosystem',
-                period: 'Oct 2025 - Present',
+                period: 'Oct 2025 - Jul 2026',
                 description: 'Full-time AI development, NLP systems, LLM integration, and cloud-native solutions.',
               },
               {
