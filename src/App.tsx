@@ -344,7 +344,8 @@ function AboutSection({ theme }: { theme: string }) {
               </p>
               <p>
                 Currently working as an <strong className={theme === 'dark' ? 'text-white' : 'text-black'}>AI Solution Architect at Huawei SA Team</strong>,
-                designing AI systems and NLP solutions.
+                designing and deploying advanced AI systems and NLP solutions for enterprise customers. Leading proof-of-concept (PoC) projects,
+                conducting technical deep dives, and collaborating with sales teams to deliver cutting-edge AI solutions.
               </p>
             </div>
 
