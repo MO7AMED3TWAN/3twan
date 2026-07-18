@@ -249,7 +249,7 @@ function HeroSection({ theme }: { theme: string }) {
             </Button>
           </a>
           <a href="#contact">
-            <Button size="lg" variant="outline" className={`border-white/20 text-white hover:bg-black/80 rounded-full px-8 py-6 text-lg ${theme === 'dark' ? 'text-white/80' : 'text-black/80'}`}>
+            <Button size="lg" variant="outline" className={`rounded-full px-8 py-6 text-lg ${theme === 'dark' ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/10'}`}>
               Get In Touch
             </Button>
           </a>
@@ -307,12 +307,16 @@ function AboutSection({ theme }: { theme: string }) {
               {/* Floating Card */}
               <div className={`absolute bottom-6 left-6 right-6 glass rounded-2xl p-4 ${theme === 'dark' ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'}`}>
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#654aff] flex items-center justify-center">
-                    <Brain className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center p-1.5">
+                    <img
+                      src={theme === 'dark' ? '/Huawei.png' : '/Huawei.png'}
+                      alt="Huawei Cloud"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <div>
-                    <div className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>AI Solution Architect</div>
-                    <div className={`text-sm ${theme === 'dark' ? 'text-white/60' : 'text-black/60'}`}>Huawei</div>
+                    <div className="font-semibold text-white">AI Solution Architect</div>
+                    <div className="text-sm text-white/60">Huawei Cloud</div>
                   </div>
                 </div>
               </div>
@@ -745,7 +749,7 @@ function ProjectsSection({ theme }: { theme: string }) {
         {/* View All Button */}
         <div className="text-center mt-12">
           <a href="https://github.com/MO7AMED3TWAN" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-8">
+            <Button variant="outline" className={`rounded-full px-8 ${theme === 'dark' ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/10'}`}>
               View All Projects on GitHub
               <Github className="w-4 h-4 ml-2" />
             </Button>
